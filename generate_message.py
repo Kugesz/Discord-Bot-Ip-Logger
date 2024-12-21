@@ -2,16 +2,17 @@ from get_ip import get_public_ip
 from get_running_containers import get_running_containers
 from datetime import datetime
 import re
+from tabulate import tabulate
 
-class Container:
-    def __init__(self, image, status, ports, names):
-        self.image = image
-        self.status = status
-        self.ports = ports
-        self.names = names
+# class Container:
+#     def __init__(self, image, status, ports, names):
+#         self.image = image
+#         self.status = status
+#         self.ports = ports
+#         self.names = names
 
-    def __str__(self):
-        return f"| {self.image:<15} | {self.status:<10} | {self.ports:<10} | {self.names:<20} |"
+#     def __str__(self):
+#         return f"| {self.image:<15} | {self.status:<10} | {self.ports:<10} | {self.names:<20} |"
 
 def get_message():
     ip = get_public_ip()
@@ -27,22 +28,27 @@ def get_message():
     containers = []
     for i in range(1, len(containersString)):
         parts = re.split(r'\s{2,}', containersString[i])
-        print(parts)
-        container = Container(
-            image =  parts[1],
-            status = parts[4],
-            ports =  parts[5],
-            names =  parts[6],
-        )
-        containers.append(container)
+        # print(parts)
+        # container = Container(
+        #     image =  parts[1],
+        #     status = parts[4],
+        #     ports =  parts[5],
+        #     names =  parts[6],
+        # )
+        # containers.append(container)
+        containers.append([parts[1], parts[4], parts[5], parts[6]])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     message = f"Public IP: {ip}\nContainers:\n"
 
-    message += "| IMAGE           | STATUS     | PORTS      | NAMES                |\n"
-    for container in containers:
-        message += str(container) + "\n"
+    # message += "| IMAGE           | STATUS     | PORTS      | NAMES                |\n"
+    # for container in containers:
+    #     message += str(container) + "\n"
     
+    headers = ["IMAGE", "STATUS", "PORTS", "NAMES"]
+
+    message += tabulate(containers, headers=headers, tablefmt="grid")
+
     return message
 
-print(get_message())
+# print(get_message())
