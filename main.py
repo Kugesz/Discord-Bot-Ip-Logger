@@ -41,7 +41,8 @@ async def on_ready():
     print(f"Message sent in channel: {channel.name}")
     update_message.start()  # Start the updating task
 
-@tasks.loop(seconds=60)  # Update every 5 seconds
+@tasks.loop(seconds=60)  # Update every 60 seconds
+print("Updating message...")
 async def update_message():
     global message_to_update
     if message_to_update:
