@@ -5,22 +5,13 @@ import discord
 from discord.ext import tasks
 import asyncio
 
-
-import requests
+from get_ip import get_public_ip
+from get_ruinning_containers import get_running_containers
 
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
-
-def get_public_ip():
-    try:
-        response = requests.get('https://api.ipify.org?format=json')
-        response.raise_for_status()
-        return response.json()['ip']
-    except requests.RequestException as e:
-        print(f"Error fetching public IP: {e}")
-        return None
     
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
@@ -35,10 +26,12 @@ def get_dynamic_content():
 
 @client.event
 async def on_ready():
+    print(client.guilds[0].name)
     global message_to_update
     print(f'Logged in as {client.user}')
     
-    channel = client.get_channel(CHANNEL_ID)
+    channel = client.guilds[0].get_channel(1319983304488910870)
+
     if channel is None:
         print("Channel not found! Check your CHANNEL_ID.")
         return
@@ -48,11 +41,12 @@ async def on_ready():
     print(f"Message sent in channel: {channel.name}")
     update_message.start()  # Start the updating task
 
-@tasks.loop(seconds=5)  # Update every 5 seconds
+@tasks.loop(seconds=60)  # Update every 5 seconds
 async def update_message():
     global message_to_update
     if message_to_update:
-        new_content = get_dynamic_content()
+        containers = get_running_containers()
+        new_content = get_public_ip()
         await message_to_update.edit(content=new_content)
 
 @client.event
