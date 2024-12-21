@@ -6,7 +6,7 @@ from discord.ext import tasks
 import asyncio
 
 from get_ip import get_public_ip
-from get_ruinning_containers import get_running_containers
+from get_running_containers import get_running_containers
 
 load_dotenv()
 
@@ -41,12 +41,12 @@ async def on_ready():
     print(f"Message sent in channel: {channel.name}")
     update_message.start()  # Start the updating task
 
-@tasks.loop(seconds=60)  # Update every 60 seconds
-print("Updating message...")
+@tasks.loop(seconds=5)  # Update every 60 seconds
 async def update_message():
+    print("Updating message...")
     global message_to_update
     if message_to_update:
-        containers = get_running_containers()
+        
         new_content = get_public_ip()
         await message_to_update.edit(content=new_content)
 
