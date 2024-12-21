@@ -5,8 +5,7 @@ import discord
 from discord.ext import tasks
 import asyncio
 
-from get_ip import get_public_ip
-from get_running_containers import get_running_containers
+from generate_message import get_message
 
 load_dotenv()
 
@@ -47,7 +46,7 @@ async def update_message():
     global message_to_update
     if message_to_update:
         
-        new_content = get_public_ip()
+        new_content = get_message()
         await message_to_update.edit(content=new_content)
 
 @client.event
