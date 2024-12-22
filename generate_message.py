@@ -38,7 +38,7 @@ def get_message():
         # containers.append(container)
         port_number = parts[5].split('/')[0]
 
-        containers.append([parts[1], parts[4], parts[5], parts[6], f"[Local](192.168.1.2:{port_number})", f"[Global]({ip}:{port_number})"])
+        containers.append([parts[1], parts[4], parts[5], parts[6], f"[Local](http://192.168.1.2:{port_number})", f"[Global](http://{ip}:{port_number})"])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     message = f"Public IP: {ip}\nContainers:\n"
