@@ -45,6 +45,7 @@ old_content = None
 async def update_message():
     print("Updating message...")
     global message_to_update
+    global old_content
     if message_to_update:
         new_content = get_message()
         if new_content != old_content:
