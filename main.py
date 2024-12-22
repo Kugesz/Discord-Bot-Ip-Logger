@@ -34,7 +34,13 @@ async def on_ready():
     if channel is None:
         print("Channel not found! Check your CHANNEL_ID.")
         return
-
+    
+    embed = discord.Embed(
+    title="Global Access",
+    description="Click [here](http://188.156.221.249:80) to visit.",
+    color=0x3498db
+    )
+    await channel.send(embed=embed)
     # Send an initial message
     message_to_update = await channel.send("Initializing...")
     print(f"Message sent in channel: {channel.name}")
