@@ -16,18 +16,18 @@ from tabulate import tabulate
 
 def get_message():
     ip = get_public_ip()
-    # containers = get_running_containers()
-    containersString = containersString = [
-    'CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS     NAMES',
-    'a1b2c3d4e5f6   my-image       "python app.py"          2 hours ago     Up 2 hours     80/tcp    my-container',
-    'b2c3d4e5f6g7   another-image  "node server.js"         3 hours ago     Up 3 hours     3000/tcp  another-container',
-    'c3d4e5f6g7h8   db-image       "postgres"               4 hours ago     Up 4 hours     5432/tcp  db-container',
-    'd4e5f6g7h8i9   redis-image    "redis-server"           5 hours ago     Up 5 hours     6379/tcp  redis-container',
-    'f6g7h8i9j0k1   python-image   "python script.py"       7 hours ago     Up 7 hours     5000/tcp  python-container'
-]
+    containers = get_running_containers()
+#     containersString = containersString = [
+#     'CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS     NAMES',
+#     'a1b2c3d4e5f6   my-image       "python app.py"          2 hours ago     Up 2 hours     80/tcp    my-container',
+#     'b2c3d4e5f6g7   another-image  "node server.js"         3 hours ago     Up 3 hours     3000/tcp  another-container',
+#     'c3d4e5f6g7h8   db-image       "postgres"               4 hours ago     Up 4 hours     5432/tcp  db-container',
+#     'd4e5f6g7h8i9   redis-image    "redis-server"           5 hours ago     Up 5 hours     6379/tcp  redis-container',
+#     'f6g7h8i9j0k1   python-image   "python script.py"       7 hours ago     Up 7 hours     5000/tcp  python-container'
+# ]
     containers = []
-    for i in range(1, len(containersString)):
-        parts = re.split(r'\s{2,}', containersString[i])
+    for i in range(1, len(containers)):
+        parts = re.split(r'\s{2,}', containers[i])
         # print(parts)
         # container = Container(
         #     image =  parts[1],
