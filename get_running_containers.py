@@ -3,7 +3,7 @@ import subprocess
 def get_running_containers():
     try:
         # Run the 'docker ps' command and capture the output
-        result = subprocess.run(['docker', 'ps'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+        result = subprocess.run(['sudo', 'docker', 'ps'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
         containers = result.stdout.strip().split('\n')
         return containers
     except subprocess.CalledProcessError as e:
