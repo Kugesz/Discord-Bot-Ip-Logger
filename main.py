@@ -35,25 +35,21 @@ async def on_ready():
         print("Channel not found! Check your CHANNEL_ID.")
         return
     
-    embed = discord.Embed(
-    title="Global Access",
-    description="Click [here](http://188.156.221.249:80) to visit.",
-    color=0x3498db
-    )
-    await channel.send(embed=embed)
     # Send an initial message
     message_to_update = await channel.send("Initializing...")
     print(f"Message sent in channel: {channel.name}")
     update_message.start()  # Start the updating task
 
-@tasks.loop(seconds=5)  # Update every 60 seconds
+old_content = None
+@tasks.loop(seconds=60)  # Update every 60 seconds
 async def update_message():
     print("Updating message...")
     global message_to_update
     if message_to_update:
-        
         new_content = get_message()
-        await message_to_update.edit(content=new_content)
+        if new_content != old_content:
+            old_content = new_content
+            await message_to_update.edit(content=new_content)
 
 @client.event
 async def on_message(message):

@@ -39,7 +39,7 @@ def get_message():
         port_number = parts[5].split('/')[0]
 
         # need to fix the table for the links
-        containers.append([parts[1], parts[4], parts[5], parts[6], f"[Local](http://192.168.1.2:{port_number})", f"[Global](http://{ip}:{port_number})"])
+        containers.append([parts[1], parts[4], parts[5], parts[6]])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     message = f"Public IP: {ip}\nContainers:\n"
@@ -50,7 +50,7 @@ def get_message():
     
     headers = ["IMAGE", "STATUS", "PORTS", "NAMES"]
 
-    message += tabulate(containers, headers=headers, tablefmt="grid")
+    message += "```"+tabulate(containers, headers=headers, tablefmt="grid")+"```"
 
     return message
 
