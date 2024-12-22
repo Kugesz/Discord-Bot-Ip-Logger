@@ -36,7 +36,9 @@ def get_message():
         #     names =  parts[6],
         # )
         # containers.append(container)
-        containers.append([parts[1], parts[4], parts[5], parts[6]])
+        port_number = parts[5].split('/')[0]
+
+        containers.append([parts[1], parts[4], parts[5], parts[6], f"[Local](192.168.1.2:{port_number})", f"[Global]({ip}:{port_number})"])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     message = f"Public IP: {ip}\nContainers:\n"
@@ -47,8 +49,8 @@ def get_message():
     
     headers = ["IMAGE", "STATUS", "PORTS", "NAMES"]
 
-    message += tabulate(containers, headers=headers, tablefmt="grid")
+    message += "```" + tabulate(containers, headers=headers, tablefmt="grid") + "```"
 
     return message
 
-# print(get_message())
+print(get_message())
