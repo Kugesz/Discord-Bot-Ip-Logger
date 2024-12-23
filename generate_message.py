@@ -42,7 +42,7 @@ def get_message():
         # containers.append([parts[1], parts[4], parts[5], parts[6]])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    message = f"Public IP: {ip}\nContainers:\nLast updated: {current_time}\n"
+    message = f"Public IP: {ip}\nLast updated: {current_time}\n"
 
     # message += "| IMAGE           | STATUS     | PORTS      | NAMES                |\n"
     # for container in containers:
