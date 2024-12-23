@@ -5,3 +5,5 @@ def get_running_containers():
 
     # List all running containers
     containers = client.containers.list()
+
+    return containers
