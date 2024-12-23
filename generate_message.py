@@ -1,8 +1,8 @@
 from get_ip import get_public_ip
-from get_running_containers import get_running_containers
+# from get_running_containers import get_running_containers
 from datetime import datetime
-import re
-from tabulate import tabulate
+# import re
+# from tabulate import tabulate
 
 # class Container:
 #     def __init__(self, image, status, ports, names):
@@ -16,7 +16,7 @@ from tabulate import tabulate
 
 def get_message():
     ip = get_public_ip()
-    containers = get_running_containers()
+#   containers = get_running_containers()
 #     containersString = containersString = [
 #     'CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS     NAMES',
 #     'a1b2c3d4e5f6   my-image       "python app.py"          2 hours ago     Up 2 hours     80/tcp    my-container',
@@ -25,9 +25,9 @@ def get_message():
 #     'd4e5f6g7h8i9   redis-image    "redis-server"           5 hours ago     Up 5 hours     6379/tcp  redis-container',
 #     'f6g7h8i9j0k1   python-image   "python script.py"       7 hours ago     Up 7 hours     5000/tcp  python-container'
 # ]
-    containers = []
-    for i in range(1, len(containers)):
-        parts = re.split(r'\s{2,}', containers[i])
+    # containers = []
+    # for i in range(1, len(containers)):
+    #     parts = re.split(r'\s{2,}', containers[i])
         # print(parts)
         # container = Container(
         #     image =  parts[1],
@@ -36,21 +36,21 @@ def get_message():
         #     names =  parts[6],
         # )
         # containers.append(container)
-        port_number = parts[5].split('/')[0]
+        # port_number = parts[5].split('/')[0]
 
         # need to fix the table for the links
-        containers.append([parts[1], parts[4], parts[5], parts[6]])
+        # containers.append([parts[1], parts[4], parts[5], parts[6]])
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    message = f"Public IP: {ip}\nContainers:\n"
+    message = f"Public IP: {ip}\nContainers:\nLast updated: {current_time}\n"
 
     # message += "| IMAGE           | STATUS     | PORTS      | NAMES                |\n"
     # for container in containers:
     #     message += str(container) + "\n"
     
-    headers = ["IMAGE", "STATUS", "PORTS", "NAMES"]
+    # headers = ["IMAGE", "STATUS", "PORTS", "NAMES"]
 
-    message += "```"+tabulate(containers, headers=headers, tablefmt="grid")+"```"
+    # message += "```"+tabulate(containers, headers=headers, tablefmt="grid")+"```"
 
     return message
 
